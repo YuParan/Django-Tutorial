@@ -17,8 +17,8 @@ Django 튜토리얼 Repository 입니다.
 ### 목차
 
 0. 소개
-1. **Repository 초기 세팅** ←
-2. CMD "django-admin startproject nameless_server ."
+1. Repository 초기 세팅
+2. **CMD 'django-admin startproject nameless_server .'** ←
 3. 서버 실행을 위한 환경변수 설정 (with yaml)
 4. Logger 세팅
 5. static & media URL/Directory 세팅
@@ -29,16 +29,29 @@ Django 튜토리얼 Repository 입니다.
 10. API 작성을 위한 세팅
 11. Sample-API 작성
 
-### 1. Repository 초기 세팅
+### 2. CMD 'django-admin startproject nameless_server .'
 
-저장소 관리를 위한 초기 세팅입니다.
+장고 프로젝트 시작을 위한 첫번째 명령어 입니다
 
-`.gitignore` 파일을 작성하였고,
+```shell
+django-admin startproject {{프로젝트 이름}} .
+# 프로젝트 이름은 snake_case 로 적절히 지정하면 됩니다. 
+# (튜토리얼에선 'nameless_server' 를 프로젝트 명으로 지정하였습니다)
+# 명령어 마지막에 . 을 찍어, 현재 경로에서 프로젝트를 시작합니다
+```
 
-장고 서버 개발에 필요한 라이브러리는 `requirements.txt` 에 작성하였습니다.
+명령어를 실행하면 지정된 경로(현재 경로 .)에 장고 프로젝트를 작성할 수 있도록 파일들이 생성됩니다.
 
-라이브러리는 `conda install ~~~` 명령어를 사용해 설치할 수 있습니다. </br>
-(버전에 따른 의존성에 유의해주세요!)
+> 현재 커밋에선 `django-admin startproject {{프로젝트 이름}} .` 명령어 실행에 따른 변경 사항과 </br>
+> nameless_server/settings.py 파일 내부의 `SECRET_KEY` 파라미터의 대치, </br>
+> README 가이드의 수정만을 포함하고 있습니다.
+
+커밋의 변경사항을 토대로
+
+- 새로 생성된 장고 프로젝트 파일들이 어떤 것들인지
+- `django-admin startproject {{프로젝트 이름}} .` 명령어에 작성된 `프로젝트 이름`이 어떤 곳에 적용이 되는지
+
+파악해보시면, Django 프로젝트의 구조를 이해하는데 도움이 될 수 있습니다.
 
 ---
 
@@ -46,7 +59,15 @@ Django 튜토리얼 Repository 입니다.
 
 ```
 └── django-tutorial
+    ├── /nameless_server
+    │   ├── __init__.py
+    │   ├── asgi.py
+    │   ├── settings.py
+    │   ├── urls.py
+    │   └── wsgi.py
+    │
     ├── .gitignore
+    ├── manage.py
     ├── README.md
     └── requirements.txt
 ```
