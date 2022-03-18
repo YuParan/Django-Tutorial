@@ -16,8 +16,8 @@ Django 튜토리얼 Repository 입니다.
 
 ### 목차
 
-0. **소개** ←
-1. Repository 초기 세팅
+0. 소개
+1. **Repository 초기 세팅** ←
 2. CMD "django-admin startproject nameless_server ."
 3. 서버 실행을 위한 환경변수 설정 (with yaml)
 4. Logger 세팅
@@ -29,13 +29,16 @@ Django 튜토리얼 Repository 입니다.
 10. API 작성을 위한 세팅
 11. Sample-API 작성
 
-### 0. 소개
+### 1. Repository 초기 세팅
 
-첫 커밋이므로 현재는 기본적인 `README` 만 작성하였습니다.
+저장소 관리를 위한 초기 세팅입니다.
 
-현재 저장소에 작성된 파일들의 구조는 아래의 `Skeleton`을
+`.gitignore` 파일을 작성하였고,
 
-개발에 필요한 라이브러리는 아래의 `Dependency` 를 참고하면 됩니다.
+장고 서버 개발에 필요한 라이브러리는 `requirements.txt` 에 작성하였습니다.
+
+라이브러리는 `conda install ~~~` 명령어를 사용해 설치할 수 있습니다. </br>
+(버전에 따른 의존성에 유의해주세요!)
 
 ---
 
@@ -43,7 +46,9 @@ Django 튜토리얼 Repository 입니다.
 
 ```
 └── django-tutorial
-    └── README.md
+    ├── .gitignore
+    ├── README.md
+    └── requirements.txt
 ```
 
 ---
