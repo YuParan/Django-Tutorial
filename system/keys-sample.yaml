@@ -1,0 +1,5 @@
+# django secure settings
+secure_settings:
+  secret_key: 'Django-SecretKey - 보안 키 이므로 관리에 유의 필요!! (그래서 대치해두었습니다)'
+  allowed_hosts:
+    - ""

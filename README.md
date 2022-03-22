@@ -18,8 +18,8 @@ Django 튜토리얼 Repository 입니다.
 
 0. 소개
 1. Repository 초기 세팅
-2. **CMD 'django-admin startproject nameless_server .'** ←
-3. 서버 실행을 위한 환경변수 설정 (with yaml)
+2. CMD 'django-admin startproject nameless_server .'
+3. **서버 실행을 위한 환경변수 설정 (with yaml)** ←
 4. Logger 세팅
 5. static & media URL/Directory 세팅
 6. CORS, django-restframework 세팅
@@ -29,29 +29,41 @@ Django 튜토리얼 Repository 입니다.
 10. API 작성을 위한 세팅
 11. Sample-API 작성
 
-### 2. CMD 'django-admin startproject nameless_server .'
+### 3. 서버 실행을 위한 환경변수 설정 (with yaml)
 
-장고 프로젝트 시작을 위한 첫번째 명령어 입니다
+보안 관련 사항을 포함한 시스템 환경변수들을 관리하기 편하도록 외부에 yaml 포맷으로 작성합니다.
 
-```shell
-django-admin startproject {{프로젝트 이름}} .
-# 프로젝트 이름은 snake_case 로 적절히 지정하면 됩니다. 
-# (튜토리얼에선 'nameless_server' 를 프로젝트 명으로 지정하였습니다)
-# 명령어 마지막에 . 을 찍어, 현재 경로에서 프로젝트를 시작합니다
-```
+system 경로의 하위에,
+- environments.yaml
+- keys.yaml
+- keys-sample.yaml
 
-명령어를 실행하면 지정된 경로(현재 경로 .)에 장고 프로젝트를 작성할 수 있도록 파일들이 생성됩니다.
+파일들을 생성.
+  
+- environments.yaml
 
-> 현재 커밋에선 `django-admin startproject {{프로젝트 이름}} .` 명령어 실행에 따른 변경 사항과 </br>
-> nameless_server/settings.py 파일 내부의 `SECRET_KEY` 파라미터의 대치, </br>
-> README 가이드의 수정만을 포함하고 있습니다.
+  ```text
+  Django 서버 구동에 필요한 기본적인 시스템 변수들을 작성합니다.
+  (프로젝트 이름, 버전, 포트, 언어, TimeZone ... 등)
+  * 직접적으로 보안에 영향을 줄 수 있는 
+    django-secret-key 및 DB 접속 정보등은 이곳에 작성하지 않습니다 ! 
+  ```
+  
+- keys.yaml
 
-커밋의 변경사항을 토대로
+  ```text
+  Django 서버 구동에 필요한 시스템 변수들 중 보안이 필요한 것들을 작성합니다.
+  (django-secret-key 및 DB 접속 정보 ... 등)
+  * gitignore 로 저장소에 올리지 않고 별도 관리 합니다 ! (.gitignore 에 추가)
+  ```
 
-- 새로 생성된 장고 프로젝트 파일들이 어떤 것들인지
-- `django-admin startproject {{프로젝트 이름}} .` 명령어에 작성된 `프로젝트 이름`이 어떤 곳에 적용이 되는지
+- keys-sample.yaml
 
-파악해보시면, Django 프로젝트의 구조를 이해하는데 도움이 될 수 있습니다.
+  ```text
+  keys.yaml 과 동일한 구조를 갖지만 내용은 공백문자 처리된 yaml 파일 입니다.
+  keys.yaml 은 gitignore 되므로, 추적되지 않는 변경 내용을 파악하기 위해 따로 작성합니다.
+  * keys.yaml 변경시, 동일한 구조를 갖도록 상시 관리 합니다 ! 
+  ```
 
 ---
 
@@ -66,11 +78,23 @@ django-admin startproject {{프로젝트 이름}} .
     │   ├── urls.py
     │   └── wsgi.py
     │
+    ├── /system
+!   │   ├── environments.yaml
+    │   ├── keys-sample.yaml
+*   │   └── keys.yaml
+    │
     ├── .gitignore
     ├── manage.py
     ├── README.md
     └── requirements.txt
 ```
+Repository 에는 다음과 같이 `*` 표시된 경로 & 파일들이 빠져있습니다.
+( 미 세팅시 서버가 동작하지 않습니다 )
+- /system 이하 경로에 `keys.yaml` 세팅 (django-secret-key, DB 및 기타 중요 key 값을 기록)
+
+프로젝트 서버 구성을 위해 `!` 표시된 파일들의 내용 수정이 필요합니다.
+- 대부분 시스템 환경 세팅은 environments.yaml 수정으로 변경됩니다.
+- Main Project Name 인 settings.py 가 있는 폴더의 이름 (현재는 `/nameless_server`) 은 environments.yaml 에 작성된 server name 과 동일해야 합니다.
 
 ---
 
@@ -84,6 +108,18 @@ pyyaml
 Pillow==8.3.1  # 이미지 처리 예시를 위한 라이브러리
 pandas==1.3.1  # CSV 처리 예시를 위한 라이브러리
 numpy==1.20.3
+```
+
+---
+
+## Run
+
+서버 실행을 위한 명령어
+
+### 개발 서버로 구동
+```
+# Python 직접 실행
+python manage.py runserver 0.0.0.0:5050  # environments.yaml 의 host 와 port 참조
 ```
 
 ---

@@ -10,22 +10,29 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import yaml
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+with open(f'{BASE_DIR}/system/environments.yaml', 'r') as f:
+    ENVIRONMENT = yaml.load(f, Loader=yaml.FullLoader)
+
+with open(f'{BASE_DIR}/system/keys.yaml', 'r') as f:
+    KEYS = yaml.load(f, Loader=yaml.FullLoader)
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'Django-SecretKey - 보안 키 이므로 관리에 유의 필요!! (그래서 대치해두었습니다)'
+SECRET_KEY = KEYS['secure_settings']['secret_key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = KEYS['secure_settings']['allowed_hosts']
 
 
 # Application definition
@@ -51,6 +58,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'nameless_server.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -67,18 +75,21 @@ TEMPLATES = [
     },
 ]
 
+
+# WSGI & ASGI application settings
 WSGI_APPLICATION = 'nameless_server.wsgi.application'
+ASGI_APPLICATION = 'nameless_server.asgi.application'
 
 
-# Database
+# Database - Not Used yet
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -103,14 +114,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
+LANGUAGE_CODE = ENVIRONMENT['settings']['language']
+TIME_ZONE = ENVIRONMENT['settings']['timezone']
 
 USE_I18N = True
-
 USE_L10N = True
 
+# setting local time
 USE_TZ = True
 
 
