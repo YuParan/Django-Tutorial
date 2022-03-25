@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import yaml
 from pathlib import Path
 
+from nameless_server import logger_config
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -122,6 +124,13 @@ USE_L10N = True
 
 # setting local time
 USE_TZ = True
+
+
+# Logger setting
+LOGGING = logger_config.get_logging_config(
+    project_name=ENVIRONMENT['server']['name'],
+    log_dir=(BASE_DIR / ENVIRONMENT['settings']['log_dir'])
+)
 
 
 # Static files (CSS, JavaScript, Images)

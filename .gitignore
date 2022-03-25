@@ -29,5 +29,8 @@ pip-delete-this-directory.txt
 # Environments
 system/keys.yaml
 
+# common directory
+!common/logs/.keep
+
 # DB-files
 *.sqlite3

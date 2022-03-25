@@ -19,8 +19,8 @@ Django 튜토리얼 Repository 입니다.
 0. 소개
 1. Repository 초기 세팅
 2. CMD 'django-admin startproject nameless_server .'
-3. **서버 실행을 위한 환경변수 설정 (with yaml)** ←
-4. Logger 세팅
+3. 서버 실행을 위한 환경변수 설정 (with yaml)
+4. **Logger 세팅** ←
 5. static & media URL/Directory 세팅
 6. CORS, django-restframework 세팅
 7. Health Check API
@@ -29,41 +29,12 @@ Django 튜토리얼 Repository 입니다.
 10. API 작성을 위한 세팅
 11. Sample-API 작성
 
-### 3. 서버 실행을 위한 환경변수 설정 (with yaml)
+### 4. Logger 세팅
 
-보안 관련 사항을 포함한 시스템 환경변수들을 관리하기 편하도록 외부에 yaml 포맷으로 작성합니다.
-
-system 경로의 하위에,
-- environments.yaml
-- keys.yaml
-- keys-sample.yaml
-
-파일들을 생성.
-  
-- environments.yaml
-
-  ```text
-  Django 서버 구동에 필요한 기본적인 시스템 변수들을 작성합니다.
-  (프로젝트 이름, 버전, 포트, 언어, TimeZone ... 등)
-  * 직접적으로 보안에 영향을 줄 수 있는 
-    django-secret-key 및 DB 접속 정보등은 이곳에 작성하지 않습니다 ! 
-  ```
-  
-- keys.yaml
-
-  ```text
-  Django 서버 구동에 필요한 시스템 변수들 중 보안이 필요한 것들을 작성합니다.
-  (django-secret-key 및 DB 접속 정보 ... 등)
-  * gitignore 로 저장소에 올리지 않고 별도 관리 합니다 ! (.gitignore 에 추가)
-  ```
-
-- keys-sample.yaml
-
-  ```text
-  keys.yaml 과 동일한 구조를 갖지만 내용은 공백문자 처리된 yaml 파일 입니다.
-  keys.yaml 은 gitignore 되므로, 추적되지 않는 변경 내용을 파악하기 위해 따로 작성합니다.
-  * keys.yaml 변경시, 동일한 구조를 갖도록 상시 관리 합니다 ! 
-  ```
+- log 파일을 저장하기 위한 경로 세팅
+- DictConfig 포맷이 적용된 Django-logging 을 정의 </br>
+  → 별도 파일(logger_config.py)로 관리 - settings 에서 import 하여 사용 </br>
+  ( logger 세팅 방법 참고 - [공식문서](https://docs.python.org/ko/3/library/logging.config.html?highlight=dictconfig#logging.config.dictConfig) )
 
 ---
 
@@ -71,9 +42,13 @@ system 경로의 하위에,
 
 ```
 └── django-tutorial
+    ├── /common
+    │   └── /logs
+    │
     ├── /nameless_server
     │   ├── __init__.py
     │   ├── asgi.py
+    │   ├── logger_config.py
     │   ├── settings.py
     │   ├── urls.py
     │   └── wsgi.py

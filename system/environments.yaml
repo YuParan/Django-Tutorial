@@ -11,5 +11,6 @@ server:
 settings:
   language: "ko-kr"
   timezone: "Asia/Seoul"
+  log_dir: "common/logs"
 
 # Write Other settings below (without Secret-Keys)
