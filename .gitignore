@@ -31,6 +31,8 @@ system/keys.yaml
 
 # common directory
 !common/logs/.keep
+!common/media/.keep
+!common/static/.keep
 
 # DB-files
 *.sqlite3

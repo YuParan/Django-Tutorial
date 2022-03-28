@@ -20,8 +20,8 @@ Django 튜토리얼 Repository 입니다.
 1. Repository 초기 세팅
 2. CMD 'django-admin startproject nameless_server .'
 3. 서버 실행을 위한 환경변수 설정 (with yaml)
-4. **Logger 세팅** ←
-5. static & media URL/Directory 세팅
+4. Logger 세팅
+5. **static & media URL/Directory 세팅** ←
 6. CORS, django-restframework 세팅
 7. Health Check API
 8. Runserver.sh Script 작성
@@ -29,12 +29,11 @@ Django 튜토리얼 Repository 입니다.
 10. API 작성을 위한 세팅
 11. Sample-API 작성
 
-### 4. Logger 세팅
+### 5. static & media URL/Directory 세팅
 
-- log 파일을 저장하기 위한 경로 세팅
-- DictConfig 포맷이 적용된 Django-logging 을 정의 </br>
-  → 별도 파일(logger_config.py)로 관리 - settings 에서 import 하여 사용 </br>
-  ( logger 세팅 방법 참고 - [공식문서](https://docs.python.org/ko/3/library/logging.config.html?highlight=dictconfig#logging.config.dictConfig) )
+통일된 경로에서 파일을 관리하기 위해 static 페이지 & media URL/Directory 를 설정합니다.
+
+해당 경로들을 생성하고, environments.yaml 과 settings.py 에 반영합니다
 
 ---
 
@@ -43,7 +42,9 @@ Django 튜토리얼 Repository 입니다.
 ```
 └── django-tutorial
     ├── /common
-    │   └── /logs
+    │   ├── /logs
+    │   ├── /media
+    │   └── /static
     │
     ├── /nameless_server
     │   ├── __init__.py

@@ -135,8 +135,12 @@ LOGGING = logger_config.get_logging_config(
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+STATIC_URL = ENVIRONMENT['settings']['static_url']
+STATIC_ROOT = ENVIRONMENT['settings']['static_root']
 
-STATIC_URL = '/static/'
+# Media files
+MEDIA_URL = ENVIRONMENT['settings']['media_url']
+MEDIA_ROOT = ENVIRONMENT['settings']['media_root']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
