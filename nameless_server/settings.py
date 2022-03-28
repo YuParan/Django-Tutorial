@@ -15,6 +15,8 @@ from pathlib import Path
 
 from nameless_server import logger_config
 
+from corsheaders.defaults import default_headers
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,6 +39,38 @@ DEBUG = True
 ALLOWED_HOSTS = KEYS['secure_settings']['allowed_hosts']
 
 
+# CORS Settings
+# https://github.com/adamchainz/django-cors-headers
+
+CORS_ORIGIN_ALLOW_ALL = True  # If 'DEBUG = False', It should be False in production
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = tuple(KEYS['secure_settings']['cors_exceptions'])
+CORS_ALLOW_HEADERS = tuple(
+    list(default_headers) +
+    KEYS['secure_settings']['cors_allow_headers']
+)
+CSRF_TRUSTED_ORIGINS = KEYS['secure_settings']['csrf_trusted_origins']
+
+
+# django-rest-framework
+# https://www.django-rest-framework.org/
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.openapi.AutoSchema',
+}
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -46,6 +80,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'corsheaders',
+
+    # custom applications
+    # Not yet
 ]
 
 MIDDLEWARE = [
@@ -56,6 +95,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+
+    # custom middlewares
+    # Not yet
 ]
 
 ROOT_URLCONF = 'nameless_server.urls'
