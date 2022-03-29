@@ -16,6 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from nameless_server.system_api import HealthCheck
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # System API
+    path('health', HealthCheck.as_view()),
 ]

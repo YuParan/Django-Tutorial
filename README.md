@@ -22,23 +22,23 @@ Django 튜토리얼 Repository 입니다.
 3. 서버 실행을 위한 환경변수 설정 (with yaml)
 4. Logger 세팅
 5. static & media URL/Directory 세팅
-6. **CORS, django-restframework 세팅** ←
-7. Health Check API
+6. CORS, django-restframework 세팅
+7. **Health Check API** ←
 8. Runserver.sh Script 작성
 9. CMD "django-admin startapp api"
 10. API 작성을 위한 세팅
 11. Sample-API 작성
 
-### 6. CORS, django-restframework 세팅
+### 7. Health Check API
 
-- `django-cors-headers` 를 활용한 CORS & CSRF 보안 설정
+다음 정보를 포함하는 Health Check API 작성
 
-- `django-rest-framework` 를 활용한 추가 설정
+- 서버 시간
+- 서버 타임존
 
-   주요 설정
-  - authentication
-  - permissions
-  - renderers
+JSONOpenAPIRenderer 형식으로 응답을 랜더링.
+
+추가로 다른 서비스에서 파싱하기 용이하도록 응답의 타입을 `content_type="application/json"` 로 지정
 
 ---
 
@@ -56,6 +56,7 @@ Django 튜토리얼 Repository 입니다.
     │   ├── asgi.py
     │   ├── logger_config.py
     │   ├── settings.py
+    │   ├── system_api.py
     │   ├── urls.py
     │   └── wsgi.py
     │
