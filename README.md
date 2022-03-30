@@ -23,22 +23,21 @@ Django 튜토리얼 Repository 입니다.
 4. Logger 세팅
 5. static & media URL/Directory 세팅
 6. CORS, django-restframework 세팅
-7. **Health Check API** ←
-8. Runserver.sh Script 작성
+7. Health Check API
+8. **Runserver.sh Script 작성** ←
 9. CMD "django-admin startapp api"
 10. API 작성을 위한 세팅
 11. Sample-API 작성
 
-### 7. Health Check API
+### 8. Runserver.sh Script 작성
 
-다음 정보를 포함하는 Health Check API 작성
+쉘 Script 를 활용한 Runserver 동작 세팅
 
-- 서버 시간
-- 서버 타임존
+- 서버 구동의 환경변수로서 environments.yaml 의 server 파라미터를 적용
 
-JSONOpenAPIRenderer 형식으로 응답을 랜더링.
+  `./bin/yaml_reader.sh` 파일에 파싱 스크립트 작성 - [출처](https://gist.github.com/pkuczynski/8665367)
 
-추가로 다른 서비스에서 파싱하기 용이하도록 응답의 타입을 `content_type="application/json"` 로 지정
+프로젝트 최상위 경로에서 `./bin/run_dev_server.sh` 명령어로 개발 서버 실행 가능
 
 ---
 
@@ -46,6 +45,11 @@ JSONOpenAPIRenderer 형식으로 응답을 랜더링.
 
 ```
 └── django-tutorial
+    ├── /bin
+    │   ├── pip.conf
+    │   ├── run_dev_server.sh
+    │   └── yaml_reader.sh
+    │
     ├── /common
     │   ├── /logs
     │   ├── /media
@@ -100,8 +104,8 @@ numpy==1.20.3
 
 ### 개발 서버로 구동
 ```
-# Python 직접 실행
-python manage.py runserver 0.0.0.0:5050  # environments.yaml 의 host 와 port 참조
+# environments.yaml 의 server 파라미터를 참조하여 서버 구동
+./bin/run_dev_server.sh
 ```
 
 ---
