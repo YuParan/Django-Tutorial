@@ -24,20 +24,32 @@ Django 튜토리얼 Repository 입니다.
 5. static & media URL/Directory 세팅
 6. CORS, django-restframework 세팅
 7. Health Check API
-8. **Runserver.sh Script 작성** ←
-9. CMD "django-admin startapp api"
+8. Runserver.sh Script 작성
+9. **CMD "django-admin startapp api"** ←
 10. API 작성을 위한 세팅
 11. Sample-API 작성
 
-### 8. Runserver.sh Script 작성
+### 9. CMD "django-admin startapp api"
 
-쉘 Script 를 활용한 Runserver 동작 세팅
+장고 프로젝트에 App 추가를 위한 명령어 입니다
 
-- 서버 구동의 환경변수로서 environments.yaml 의 server 파라미터를 적용
+```text
+django-admin startapp {{app 이름}}
+# app 이름은 snake_case 로 적절히 지정하면 됩니다. 
+# (튜토리얼에선 'api' 를 app 명으로 지정하였습니다)
+```
 
-  `./bin/yaml_reader.sh` 파일에 파싱 스크립트 작성 - [출처](https://gist.github.com/pkuczynski/8665367)
+명령어를 실행하면 현재 프로젝트 경로에 장고 App 을 작성할 수 있도록 경로와 파일들이 생성됩니다.
 
-프로젝트 최상위 경로에서 `./bin/run_dev_server.sh` 명령어로 개발 서버 실행 가능
+> 현재 커밋에선 "django-admin startapp {{app 이름}}" 명령어 실행에 따른 변경 사항과
+> README 가이드의 수정만을 포함하고 있습니다.
+>
+커밋의 변경사항을 토대로
+
+- 새로 생성된 장고 startapp 관련 파일들이 어떤 것들인지
+- django-admin startapp {{app 이름}} 명령어에 작성된 `App 이름` 이 어떤 곳에 적용이 되는지
+
+파악해보시면, Django 프로젝트의 구조를 이해하는데 도움이 될 수 있습니다.
 
 ---
 
@@ -45,6 +57,15 @@ Django 튜토리얼 Repository 입니다.
 
 ```
 └── django-tutorial
+    ├── /api
+    │   ├── /migrations
+    │   ├── __init__.py
+    │   ├── admin.py
+    │   ├── apps.py
+    │   ├── models.py
+    │   ├── tests.py
+    │   └── views.py
+    │
     ├── /bin
     │   ├── pip.conf
     │   ├── run_dev_server.sh
