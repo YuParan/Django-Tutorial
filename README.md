@@ -26,16 +26,35 @@ Django 튜토리얼 Repository 입니다.
 7. Health Check API
 8. Runserver.sh Script 작성
 9. CMD "django-admin startapp api"
-10. **API 작성을 위한 세팅** ←
-11. Sample-API 작성
+10. API 작성을 위한 세팅
+11. **Sample-API 작성** ←
 
-### 10. API 작성을 위한 세팅
+### 11. Sample-API 작성
 
-`django-admin startapp api` 이후, 생성된 App(~api) 파일들이 프로젝트에 적용 될 수 있도록 내용 작성
+Test 용 Sample API 작성
 
-- settings.py 에 INSTALLED_APPS 내용 작성
-- urls.py 에 api.urls 주소 include
-- Response 응답 명세 작성
+EndPoints
+
+- api/ample/get_query_string
+
+  Django 에서 GET Request 와 query_parameter parsing 처리를 위한 예시 API
+  
+  URL query_parameter 형식으로 `parameter` 를 입력받아 내용을 파싱한 후, json 포맷으로 지정한 메시지와 함께 응답
+
+
+- api/sample/json_api
+
+  Django 에서 json Request 와 그 처리를 위한 예시 API
+  
+  application/json (raw) 형식으로 `parameter` 를 입력받아 내용을 파싱한 후, json 포맷으로 동일하게 응답
+
+
+- api/sample/upload_form_data
+
+  Django 에서 파일 Request 와 그 처리를 위한 예시 API
+
+  form-data 형식으로 `parameter` 와 `file` 을 입력받아, 업로드 된 file 의 내부 정보를 응답
+            
 
 ---
 
@@ -45,6 +64,12 @@ Django 튜토리얼 Repository 입니다.
 └── django-tutorial
     ├── /api
     │   ├── /migrations
+    │   │
+    │   ├── /sample
+    │   │   ├── get_query_string.py
+    │   │   ├── json_api.py
+    │   │   └── upload_form_data.py
+    │   │
     │   ├── __init__.py
     │   ├── admin.py
     │   ├── apps.py
