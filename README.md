@@ -27,34 +27,19 @@ Django 튜토리얼 Repository 입니다.
 8. Runserver.sh Script 작성
 9. CMD "django-admin startapp api"
 10. API 작성을 위한 세팅
-11. **Sample-API 작성** ←
+11. Sample-API 작성
+12. **Docker Container 로 배포하기** ←
 
-### 11. Sample-API 작성
+### 12. Docker Container 로 배포하기
 
-Test 용 Sample API 작성
+- Shell Script 를 활용한 Dockerize
 
-EndPoints
+  build_docker_image.sh & docker_run/stop_container.sh 세팅
 
-- api/ample/get_query_string
+  (README 최하단에 작성된 도커 명령어를 활용하여 컨테이너 환경으로 서버를 실행 할 수 있습니다)
 
-  Django 에서 GET Request 와 query_parameter parsing 처리를 위한 예시 API
-  
-  URL query_parameter 형식으로 `parameter` 를 입력받아 내용을 파싱한 후, json 포맷으로 지정한 메시지와 함께 응답
-
-
-- api/sample/json_api
-
-  Django 에서 json Request 와 그 처리를 위한 예시 API
-  
-  application/json (raw) 형식으로 `parameter` 를 입력받아 내용을 파싱한 후, json 포맷으로 동일하게 응답
-
-
-- api/sample/upload_form_data
-
-  Django 에서 파일 Request 와 그 처리를 위한 예시 API
-
-  form-data 형식으로 `parameter` 와 `file` 을 입력받아, 업로드 된 file 의 내부 정보를 응답
-            
+현재 프로젝트 경로와 도커 컨테이너 내부의 프로젝트 경로를 Bind-Mount 로 묶어주어, 로컬 경로의 코드가 수정될 시 리얼타임으로 컨테이너에 반영됩니다 </br>
+( = 코드 변경 시, Django StatReloader 가 동작합니다 )
 
 ---
 
@@ -80,6 +65,9 @@ EndPoints
     │   └── views.py
     │
     ├── /bin
+    │   ├── build_docker_image.sh
+    │   ├── docker_run_container.sh
+    │   ├── docker_stop_container.sh
     │   ├── pip.conf
     │   ├── run_dev_server.sh
     │   └── yaml_reader.sh
@@ -104,6 +92,7 @@ EndPoints
 *   │   └── keys.yaml
     │
     ├── .gitignore
+    ├── Dockerfile
     ├── manage.py
     ├── README.md
     └── requirements.txt
@@ -136,10 +125,20 @@ numpy==1.20.3
 
 서버 실행을 위한 명령어
 
-### 개발 서버로 구동
+### Python 가상환경에서 개발서버 구동
 ```
 # environments.yaml 의 server 파라미터를 참조하여 서버 구동
 ./bin/run_dev_server.sh
+```
+
+### Docker Container 로 구동
+```
+# Docker Image 빌드
+./bin/build_docker_image.sh
+# Container 실행
+./bin/docker_run_container.sh
+# Container 중지
+./bin/docker_stop_container.sh
 ```
 
 ---
