@@ -11,7 +11,8 @@ SETTING_FILE=system/environments.yaml  # environments 파일 경로 매칭 필�
 # read yaml file
 eval $(parse_yaml $PROJECT_PATH/$SETTING_FILE "")
 
-docker build \
+# Cross-platform CPU(M1 Mac) 대응을 위해 `--platform linux/amd64` 가 필요 합니다
+docker build --platform linux/amd64 \
     --build-arg PROJECT_NAME=$server_name \
     --build-arg PROJECT_PORT=$server_port \
     -t $server_name:$server_version .
