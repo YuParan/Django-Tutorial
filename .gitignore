@@ -30,6 +30,7 @@ pip-delete-this-directory.txt
 system/keys.yaml
 
 # common directory
+/common
 !common/logs/.keep
 !common/media/.keep
 !common/static/.keep

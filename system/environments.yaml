@@ -14,8 +14,8 @@ settings:
   log_dir: "common/logs"
   # static & media settings
   static_url: "/static/"
-  static_root: "/common/static/"
+  static_root: "common/static"
   media_url: "/media/"
-  media_root: "/common/media/"
+  media_root: "common/media"
 
 # Write Other settings below (without Secret-Keys)
